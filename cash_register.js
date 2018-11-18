@@ -8,22 +8,23 @@ function checkCashRegister(price, cash, cid) {
 
   change.cid = cid.concat(change.cid)
 
-  let changeAmount = cash - price
+  let changeAmount = cash - price;
 
-  console.log(changeAmount)
-
-  // console.log(change)
-
-
+for (let [key, value] in change.cid) { 
+  if (changeAmount > change.cid[key][1]) 
+  change.cid[key][1] -= changeAmount
+}  
+  
+ console.log(change)  
 
   // Here is your change, ma'am.
-  return change;
+  // return change;
 }
 
 // make change object with values status: and change:
 // push the cash into cid array
 // deduct price from cash
-// decide whether status: OPEN (if change > changeAmount) or status: INSUFFICIENT_FUNDS (if change < changeAmount) or CLOSED (if all num === 0)
+// decide whether status: OPEN (if change > changeAmount) or status: INSUFFICIENT_FUNDS (if change < changeAmount) or CLOSED (if all values === 0)
 // loop over cid and push change into change: value
 
 // Example cash-in-drawer array:
