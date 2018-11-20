@@ -5,34 +5,47 @@ function checkCashRegister(price, cash, cid) {
    let change = {
      status: 'OPEN',
      cid: [],
-     change: []
+     change: ['', 0] 
    };
+ 
+ // console.log(change.change[1])
+ 
+   let changeArray = [];
  
    let changeAmount = cash - price;
    // console.log(changeAmount)
  
    change.cid = cid.concat(change.cid);  
+     //  console.log(change.change[0])
  
    for (let [key, value] in currencyUnits) {
+     //  console.log(change.change[0])
      while (changeAmount >= currencyUnits[key][1]) {
-       change.change.push(currencyUnits[key])
+       // while (change.change[0] === change.change[0]-1) {
+       change.change[0] += currencyUnits[key][0];
+       change.change[1] += currencyUnits[key][1]; 
        changeAmount -= currencyUnits[key][1]
-     }       
+       // }
+     }  
    }
  
-   console.log(change.change[0][1] + change.change[1][1])
+   console.log(change)
  
-   for (let [key, value] in change.change) {
-     // console.log(change.change[key][1])
-     change.change[key][1] + change.change[key][1]    
-   }
+ 
+     // console.log(changeArray[0][1])
+   
+ 
+   // console.log(change.change[0].concat(change.change[1]))
+ 
+   // change.change.reduce((a, b) => a + b)
+ 
+   // console.log(change.change)
  
  // for (let [key, value] in change.cid) { 
     // change.cid[key][1] = 0
  // }
    
  //  console.log(change)  
- //  console.log(newArray)  
  
    // Here is your change, ma'am.
    // return change;
