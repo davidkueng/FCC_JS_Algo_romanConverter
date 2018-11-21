@@ -4,18 +4,20 @@ function checkCashRegister(price, cash, cid) {
 
 const currencyUnits = [["PENNY", 0.01], ["NICKEL", 0.05], ["DIME", 0.1], ["QUARTER", 0.25],                             ["ONE", 1], ["FIVE", 5], ["TEN", 10], ["TWENTY", 20], ["ONE HUNDRED",                          100]];
  
-   let change = {
+  let change = {
      status: 'OPEN',
      inDrawer: [],
      change: [] 
-   };
+  };
  
- // console.log(change.change[1])
+  let changeArray = [];
  
-   let changeArray = [];
- 
-   let changeAmount = cash - price;   
- 
+  let changeAmount = cash - price;   
+
+  let cidTempArray = cid.map((arr) => {
+    return arr.slice();
+  });
+  
    change.inDrawer = [...cid].reverse().concat(change.inDrawer);
 
   //  console.log(change.inDrawer);
@@ -30,7 +32,7 @@ const currencyUnits = [["PENNY", 0.01], ["NICKEL", 0.05], ["DIME", 0.1], ["QUART
      }  
    }
  
-  console.log(cid)
+  console.log(cidTempArray)
   console.log(change.inDrawer) 
   // console.log(changeArray) 
  
