@@ -1,60 +1,44 @@
 function checkCashRegister(price, cash, cid) {
   
-  const currencyUnits = [["ONE HUNDRED", 100], ["TWENTY", 20], ["TEN", 10], ["FIVE", 5], ["DOLLAR",     1], ["QUARTER", 0.25], ["DIME", 0.1], ["NICKEL", 0.05], ["PENNY", 0.01]];
+  // console.log(cid)
+
+const currencyUnits = [["PENNY", 0.01], ["NICKEL", 0.05], ["DIME", 0.1], ["QUARTER", 0.25],                             ["ONE", 1], ["FIVE", 5], ["TEN", 10], ["TWENTY", 20], ["ONE HUNDRED",                          100]];
  
    let change = {
      status: 'OPEN',
-     cid: [],
-     change: ['', 0] 
+     inDrawer: [],
+     change: [] 
    };
  
  // console.log(change.change[1])
  
    let changeArray = [];
  
-   let changeAmount = cash - price;
-   // console.log(changeAmount)
+   let changeAmount = cash - price;   
  
-   change.cid = cid.concat(change.cid);  
-     //  console.log(change.change[0])
+   change.inDrawer = [...cid].reverse().concat(change.inDrawer);
+
+  //  console.log(change.inDrawer);
  
-   for (let [key, value] in currencyUnits) {
-     //  console.log(change.change[0])
-     while (changeAmount >= currencyUnits[key][1]) {
-       // while (change.change[0] === change.change[0]-1) {
-       change.change[0] += currencyUnits[key][0];
-       change.change[1] += currencyUnits[key][1]; 
-       changeAmount -= currencyUnits[key][1]
-       // }
+   for (let value in currencyUnits.reverse()) {
+    //  console.log(currencyUnits[value][1])
+    //  console.log(change.cid[value][1]) 
+     while (changeAmount >= currencyUnits[value][1] && change.inDrawer[value][1] !=0) {
+       changeArray.push(currencyUnits[value]); 
+       changeAmount -= currencyUnits[value][1];
+       change.inDrawer[value][1] -= currencyUnits[value][1]
      }  
    }
  
-   console.log(change)
- 
- 
-     // console.log(changeArray[0][1])
-   
- 
-   // console.log(change.change[0].concat(change.change[1]))
- 
-   // change.change.reduce((a, b) => a + b)
- 
-   // console.log(change.change)
- 
- // for (let [key, value] in change.cid) { 
-    // change.cid[key][1] = 0
- // }
-   
- //  console.log(change)  
+  console.log(cid)
+  console.log(change.inDrawer) 
+  // console.log(changeArray) 
  
    // Here is your change, ma'am.
    // return change;
  }
  
- // deduct changeAmount from the corresponding currency in cid
- // push changeAmount with currency into new array
- // change value of status to OPEN, CLOSED or INSUFFICIENT_FUNDS depending on status of cid
- // return the whole change object without cid
+ // push the difference between cid and changed cid into change.change array
  
  // Example cash-in-drawer array:
  // [["PENNY", 1.01],
