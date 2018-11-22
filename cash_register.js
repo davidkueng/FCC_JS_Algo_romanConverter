@@ -10,20 +10,23 @@ function checkCashRegister(price, cash, cid) {
    
     let changeAmount = cash - price;   
   
+    // create immutable cid argument (multi-dimensional array)
     let cidTempArray = cid.map((arr) => {
       return arr.slice();
     });
-  
+
+    // pushing cid argument from function into the change.cid property of our Object
     change.cid = [...cid].reverse().concat(change.cid);
    
+    // deduct currencyUnits from the changeAmount while we do have enough cash in drawer
     for (let value in currencyUnits.reverse()) {
-      while (Math.round(changeAmount * 100) /100 >= currencyUnits[value][1] 
-              && change.cid[value][1] > 0) {
+      while (Math.round(changeAmount * 100) /100 >= currencyUnits[value][1] && change.cid[value][1] > 0) {
         changeAmount -= currencyUnits[value][1];
         change.cid[value][1] -= currencyUnits[value][1]
       }  
     }
-  
+    
+    // push the difference between the cash in drawer to the original cid argument to the change.change property
     for (let value in change.cid.reverse()) {
       if (change.cid[value][1] != cidTempArray[value][1] | cidTempArray[value][1] === 0) {
         let changeCurrency = cidTempArray[value][1] - change.cid[value][1]; 
@@ -33,6 +36,7 @@ function checkCashRegister(price, cash, cid) {
   
     change.change.sort((a, b) => b[1] - a[1])
   
+    // change change.status property to the appropriate status
     for (let value in change.status) {
       if (changeAmount > 0) {
         change.status = "INSUFFICIENT_FUNDS"
