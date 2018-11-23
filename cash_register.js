@@ -18,7 +18,7 @@ function checkCashRegister(price, cash, cid) {
     // pushing cid argument from function into the change.cid property of our Object
     change.cid = [...cid].reverse().concat(change.cid);
    
-    // deduct currencyUnits from the changeAmount while we do have enough cash in drawer
+    // deduct currencyUnits from the changeAmount while we do have cash in drawer
     for (let value in currencyUnits.reverse()) {
       while (Math.round(changeAmount * 100) /100 >= currencyUnits[value][1] && change.cid[value][1] > 0) {
         changeAmount -= currencyUnits[value][1];
@@ -26,7 +26,7 @@ function checkCashRegister(price, cash, cid) {
       }  
     }
     
-    // push the difference between the cash in drawer to the original cid argument to the change.change property
+    // push the difference between the cash in drawer left to the original cid argument to the change.change property
     for (let value in change.cid.reverse()) {
       if (change.cid[value][1] != cidTempArray[value][1] | cidTempArray[value][1] === 0) {
         let changeCurrency = cidTempArray[value][1] - change.cid[value][1]; 
